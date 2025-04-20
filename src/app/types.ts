@@ -6,9 +6,12 @@ export type Navigation = {
   label: string
 }
 
-export type Habit = {
-  id: string;
+export type NewHabit = {
   title: string;
   description?: string;
+};
+
+export type Habit = NewHabit & {
+  id: string;
   isCompleted: boolean;
 };

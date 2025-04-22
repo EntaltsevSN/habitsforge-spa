@@ -1,16 +1,16 @@
-import { Habit, NewHabit } from "../../../app/types";
+import { Habit, NewHabit, store } from "../../../app/types";
 import { habitsStore } from "../../../widgets/habits-list/api/store";
 
 export function isTitleAlreadyExists(habits: Habit[], title: string) {
-  return habits.some((habit: Habit) => habit.title === title);
+  return habits.some((habit) => habit.title === title);
 }
 
-export function publicNewHabit(data: NewHabit) {
-  const { habits, addNewHabit } = habitsStore.getState();
+export function updateHabitData(data: NewHabit, id: number) {
+  const { habits, updateHabit }: store = habitsStore.getState();
   if (isTitleAlreadyExists(habits, data.title)) {
     alert('Такая привычка уже есть!');
     return false;
   }
-  addNewHabit(data);
+  updateHabit(data, id);
   return true;
 }

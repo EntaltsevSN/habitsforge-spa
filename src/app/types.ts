@@ -12,6 +12,15 @@ export type NewHabit = {
 };
 
 export type Habit = NewHabit & {
-  id: string;
+  id: number;
   isCompleted: boolean;
 };
+
+export type store = {
+  habits: Habit[],
+  setHabits: (habits: Habit[]) => void,
+  toggleHabitCompletion: (id: number) => void,
+  addNewHabit: (newHabit: NewHabit) => void,
+  updateHabit: (newHabit: NewHabit, id: number) => void,
+  removeHabit: (id: number) => void
+}

@@ -1,10 +1,12 @@
 import AddNewHabitForm from "../features/add-new-habit/ui/AddNewHabitForm";
-import { dataHabits } from "../widgets/habits-list/api/data";
+import { useHabitsStore } from "../widgets/habits-list/api/store";
 import HabitsList from "../widgets/habits-list/ui/HabitsList";
 
 function Home() {
+  const { habits } = useHabitsStore();
+
   return <div>
-    <HabitsList data={dataHabits} />
+    <HabitsList data={habits} />
     <AddNewHabitForm />
   </div>;
 };

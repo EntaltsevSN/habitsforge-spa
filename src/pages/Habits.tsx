@@ -1,6 +1,6 @@
 import AddNewHabitForm from "../features/add-new-habit/ui/AddNewHabitForm";
-import { useHabitsStore } from "../widgets/habits-list/api/store";
-import HabitsList from "../widgets/habits-list/ui/HabitsList";
+import { useHabitsStore } from "../widgets/habits/api/store";
+import HabitsList from "../widgets/habits/ui/HabitsList";
 
 function Home() {
   const { habits } = useHabitsStore();

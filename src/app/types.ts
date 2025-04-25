@@ -6,6 +6,8 @@ export type Navigation = {
   label: string
 }
 
+// HABITS
+
 export type NewHabit = {
   title: string;
   description?: string;
@@ -16,7 +18,7 @@ export type Habit = NewHabit & {
   isCompleted: boolean;
 };
 
-export type store = {
+export type HabitsStore = {
   habits: Habit[],
   setHabits: (habits: Habit[]) => void,
   toggleHabitCompletion: (id: number) => void,
@@ -24,3 +26,27 @@ export type store = {
   updateHabit: (newHabit: NewHabit, id: number) => void,
   removeHabit: (id: number) => void
 }
+
+// USERS
+
+export type NewUser = {
+  login: string;
+  email: string;
+};
+
+export type User = NewUser & {
+  id: number;
+  password: string;
+  isAdmin: boolean;
+  points: number,
+  exp: number
+};
+
+export type UsersStore = {
+  users: User[],
+  userId: number,
+  setUsers: (users: User[]) => void,
+  addNewUser: (newUser: NewUser) => void,
+  updateUser: (newUser: NewUser, id: number) => void,
+  removeUser: (id: number) => void
+};

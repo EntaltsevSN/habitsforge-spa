@@ -1,5 +1,6 @@
 import { create } from 'zustand'
-import { Habit, NewHabit, store } from '../../../app/types'
+import { Habit, NewHabit, HabitsStore } from '../../../app/types'
+import { LS_HABITS_LIST_NAME } from '../../../app/constants'
 
 function getNextId(habitsList: Habit[]) {
   const ids = habitsList.map((habit) => habit.id)
@@ -7,8 +8,7 @@ function getNextId(habitsList: Habit[]) {
 }
 
 function updateLocalHabitsData(data: Habit[]) {
-  const LS_TAG: string = 'habitsData';
-  localStorage.setItem(LS_TAG, JSON.stringify(data))
+  localStorage.setItem(LS_HABITS_LIST_NAME, JSON.stringify(data))
 }
  
 const store = create((set) => ({
@@ -20,7 +20,7 @@ const store = create((set) => ({
       habits: habitsData
     });
   }),
-  toggleHabitCompletion: (id: number) => set((state: store) => {
+  toggleHabit: (id: number) => set((state: HabitsStore) => {
     const habitsData = state.habits.map((habit: Habit) => (
       habit.id === id 
         ? {...habit, isCompleted: !habit.isCompleted} 
@@ -29,7 +29,7 @@ const store = create((set) => ({
     updateLocalHabitsData(habitsData);
     return ({ habits: habitsData });
   }),
-  addNewHabit: (data: NewHabit) => set((state: store) => {
+  addNewHabit: (data: NewHabit) => set((state: HabitsStore) => {
     const habitsData = [...state.habits, {
       ...data,
       id: getNextId(state.habits),
@@ -38,7 +38,7 @@ const store = create((set) => ({
     updateLocalHabitsData(habitsData);
     return ({ habits: habitsData });
   }),
-  updateHabit: (data: NewHabit, id: number) => set((state: store) => {
+  updateHabit: (data: NewHabit, id: number) => set((state: HabitsStore) => {
     const habitsData = state.habits.map((habit: Habit) => (
       habit.id === id 
         ? {...habit, ...data} 
@@ -47,7 +47,7 @@ const store = create((set) => ({
     updateLocalHabitsData(habitsData);
     return ({ habits: habitsData })
   }),
-  removeHabit: (id: number) => set((state: store) => {
+  removeHabit: (id: number) => set((state: HabitsStore) => {
     const habitsData = state.habits.filter((habit) => habit.id !== id);
     updateLocalHabitsData(habitsData);
     return ({ habits: habitsData })

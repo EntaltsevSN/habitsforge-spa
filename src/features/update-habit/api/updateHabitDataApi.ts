@@ -1,5 +1,5 @@
 import { Habit, NewHabit, store } from "../../../app/types";
-import { habitsStore } from "../../../widgets/habits-list/api/store";
+import { habitsStore } from "../../../widgets/habits/api/store";
 
 export function isTitleAlreadyExists(habits: Habit[], title: string) {
   return habits.some((habit) => habit.title === title);

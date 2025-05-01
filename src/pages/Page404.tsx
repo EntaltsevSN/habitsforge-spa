@@ -1,5 +1,9 @@
 function Page404() {
-  return <>404</>;
-};
+  return (
+    <>
+      Page404
+    </>
+  )
+}
 
 export default Page404;

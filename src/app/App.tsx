@@ -1,44 +1,23 @@
-import { dataHabits } from "../widgets/habits/api/data";
-import Header from "./components/Header";
-import AppRouter from "./router";
-import { Habit, User } from "./types";
-import { useHabitsStore } from "../widgets/habits/api/store";
-import { useEffect } from "react";
-import { LS_HABITS_LIST_NAME, LS_LOGGED_IN_USER_ID_NAME, LS_USERS_LIST_NAME } from "./constants";
-import { dataUsers } from "../widgets/users/api/data";
-import { useUsersStore } from "../widgets/users/api/store";
-
-function fetchHabitsData(): null | Habit[] {
-  const localData = localStorage.getItem(LS_HABITS_LIST_NAME);
-  return localData
-    ? JSON.parse(localData)
-    : dataHabits;
-}
-
-function fetchUsersData(): null | User[] {
-  const localData = localStorage.getItem(LS_USERS_LIST_NAME);
-  const localId = localStorage.getItem(LS_LOGGED_IN_USER_ID_NAME);
-  return ({
-    users: localData
-      ? JSON.parse(localData)
-      : dataUsers,
-    userId: localId
-  })
-}
+import AppRouter from './router/AppRouter';
+import Layout from './layout/Layout';
+import Header from './layout/Header';
+import { useEffect } from 'react';
+import useApp from './model/useApp';
 
 function App() {
-  const { habits, setHabits } = useHabitsStore();
-  const { users, setUsers } = useUsersStore();
+  const { fetchHabits, fetchUsersData } = useApp();
 
   useEffect(() => {
-    setHabits(fetchHabitsData());
-    setUsers(fetchUsersData());
+    fetchHabits();
+    fetchUsersData();
   }, []);
 
-  return <div>
-    <Header />
-    {users && <AppRouter />}
-  </div>
-};
+  return (
+    <Layout>
+      <Header />
+      <AppRouter />
+    </Layout>
+  )
+}
 
 export default App;

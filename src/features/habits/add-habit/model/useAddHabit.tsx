@@ -12,7 +12,8 @@ type UseAddHabit = {
   updateField: (field: string, data: string) => void,
   shouldDisableButton: () => boolean,
   addHabit: () => void,
-  handleSubmit: (event: FormEvent<HTMLFormElement>, callback: () => void) => void
+  handleSubmit: (event: FormEvent<HTMLFormElement>, callback: () => void) => void,
+  isAllowedToAddHabit: () => boolean
 }
 
 const initialFormData: AddHabitFormData = {
@@ -55,9 +56,25 @@ function useAddHabit(): UseAddHabit {
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>, callback: () => void) {
-      event.preventDefault();
-      callback()
-    }
+    event.preventDefault();
+    callback()
+  }
+
+  function isAllowedToAddHabit() {
+    const today = [
+      new Date().getDate(),
+      new Date().getMonth() + 1,
+      new Date().getFullYear()
+    ].join('-');
+    const habitsDates = store.habits.map((habit) => (
+      [
+        new Date(habit.dateAdded * 1000).getDate(),
+        new Date(habit.dateAdded * 1000).getMonth() + 1,
+        new Date(habit.dateAdded * 1000).getFullYear()
+      ].join('-')
+    ))
+    return !habitsDates.includes(today);
+  }
 
   return {
     title: formData.title, 
@@ -65,7 +82,8 @@ function useAddHabit(): UseAddHabit {
     updateField,
     shouldDisableButton,
     addHabit,
-    handleSubmit
+    handleSubmit,
+    isAllowedToAddHabit
   };
 }
 

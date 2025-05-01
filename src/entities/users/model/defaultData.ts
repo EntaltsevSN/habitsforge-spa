@@ -7,8 +7,8 @@ const defaultData: User[] = [
     email: 'admin@spa.com',
     password: '123456',
     isAdmin: true,
-    points: 0,
-    exp: 1000
+    points: 10,
+    exp: 20
   }
 ];
 

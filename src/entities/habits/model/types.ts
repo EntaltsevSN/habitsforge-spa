@@ -4,7 +4,8 @@ export type Habit = {
   description: string,
   isCompleted: boolean,
   userId: number,
-  isActive: boolean
+  isActive: boolean,
+  dateAdded: number
 };
 
 export type NewHabit = Pick<Habit, 'title' | 'description' | 'userId'>;

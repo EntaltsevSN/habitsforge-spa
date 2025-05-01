@@ -9,7 +9,8 @@ function UserData(user: User) {
       <p>{user.email}</p>
       <p>{user.isAdmin ? 'Админ' : 'Пользователь'}</p>
       <p>Текущий уровень: {getLevelData().level}</p>
-      <code>Опыт: {getLevelData().exp} из {getLevelData().nextExp}</code>
+      <p><code>Опыт: {user.exp} из {getLevelData().nextExp}</code></p>
+      <p><code>Очки: {user.points}</code></p>
       <p><a onClick={() => logout()}>Выйти</a></p>
     </div>
   )

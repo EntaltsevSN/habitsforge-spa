@@ -8,8 +8,8 @@ function Profile() {
   return (
     <div className="profile">
       {!isLoaded && <>Загружаем данные...</>}
-      {!isLoggedIn() && <LoginUser />}
-      {isLoggedIn() && <UserData {...user} />}
+      {isLoaded && !isLoggedIn() && <LoginUser />}
+      {isLoaded && isLoggedIn() && <UserData {...user} />}
     </div>
   )
 }

@@ -47,6 +47,19 @@ const store = create<UsersStore>((set, get) => ({
       return user;
     });
     get().setUsers(newData);
+  },
+  addExpAndPoints: (id: number) => {
+    const newData = get().users.map((user: User) => {
+      if (user.id === id) {
+        return ({
+          ...user, 
+          exp: user.exp + 20,
+          points: user.points + 10
+        });
+      }
+      return user;
+    });
+    get().setUsers(newData);
   }
 }));
 

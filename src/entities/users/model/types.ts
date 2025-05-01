@@ -20,6 +20,7 @@ export type UsersStore = {
   logoutUser: () => void,
   addUser: (data: NewUser) => void,
   updateUser: (data: NewUser, id: number) => void,
+  addExpAndPoints: (id: number) => void
 }
 
 export type UserLevel = {

@@ -1,20 +1,23 @@
 import { useState } from "react";
 import { useHabitsStore } from "./store";
 import { Habit } from "./types";
+import { useUsersStore } from "../../users/model/store";
 
 type UseHabit = {
-  toggleHabit: (id: number) => void,
+  completeHabit: (id: number) => void,
   isEditable: boolean,
   toggleEditable: () => void,
   removeHabit: (id: number) => void
 }
 
 function useHabit(habit: Habit): UseHabit {
-  const store = useHabitsStore();
+  const habitsStore = useHabitsStore();
+  const usersStore = useUsersStore();
   const [isEditable, setIsEditable] = useState(false);
 
-  function toggleHabit() {
-    store.toggleHabit(habit.id)
+  function completeHabit() {
+    habitsStore.toggleHabit(habit.id);
+    usersStore.addExpAndPoints(usersStore.loggedInId as number);
   };
 
   function toggleEditable() {
@@ -22,10 +25,10 @@ function useHabit(habit: Habit): UseHabit {
   }
 
   function removeHabit(id: number) {
-    store.removeHabit(id);
+    habitsStore.removeHabit(id);
   }
 
-  return {toggleHabit, isEditable, toggleEditable, removeHabit};
+  return {completeHabit, isEditable, toggleEditable, removeHabit};
 }
 
 export default useHabit;

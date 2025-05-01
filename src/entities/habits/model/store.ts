@@ -18,7 +18,8 @@ const store = create<HabitsStore>((set, get) => ({
         id: getNextIdFromList(get().habits),
         ...data,
         isCompleted: false,
-        isActive: true
+        isActive: true,
+        dateAdded: Math.floor(+new Date() / 1000)
       }
     ];
     get().setHabits(newData);
@@ -35,7 +36,7 @@ const store = create<HabitsStore>((set, get) => ({
   toggleHabit: (id: number) => {
     const newData = get().habits.map((habit: Habit) => {
       if (habit.id === id) {
-        return ({...habit, isCompleted: !habit.isCompleted});
+        return ({...habit, isCompleted: true});
       }
       return habit;
     });

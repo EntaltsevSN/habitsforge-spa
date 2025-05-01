@@ -28,6 +28,7 @@ function useUserData(): UseUserData {
   }
 
   function getLevelData() {
+    console.log('store', store)
     if (!store.isLoaded) {
       return null;
     }
@@ -38,7 +39,7 @@ function useUserData(): UseUserData {
     return levels.reduce((current, next) => {
       if (currentExp < next.exp) {
         const nextLevel = levels.find((level) => current.level + 1 === level.level) as UserLevel;
-        const isLastLevel = current.level === Math.max(...levels.map((level) => level.level))
+        const isLastLevel = current.level === Math.max(...levels.map((level) => level.level));
         return ({
           ...current,
           nextExp: isLastLevel ? null : nextLevel.exp

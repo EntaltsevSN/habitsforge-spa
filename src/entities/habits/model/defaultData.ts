@@ -7,7 +7,8 @@ const defaultData: Habit[] = [
     description: '8 стаканов в день',
     userId: 1,
     isCompleted: false,
-    isActive: true
+    isActive: true,
+    dateAdded: 1744822236,
   },
   {
     id: 2,
@@ -15,7 +16,8 @@ const defaultData: Habit[] = [
     description: '15 минут разминки',
     userId: 1,
     isCompleted: true,
-    isActive: true
+    isActive: true,
+    dateAdded: 1745174423,
   },
   {
     id: 3,
@@ -23,7 +25,8 @@ const defaultData: Habit[] = [
     description: '20 минут книги',
     userId: 1,
     isCompleted: false,
-    isActive: true
+    isActive: true,
+    dateAdded: 1745589554,
   },
 ];
 
